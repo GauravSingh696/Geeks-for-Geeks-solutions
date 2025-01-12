@@ -7,19 +7,11 @@ class Solution {
         post[n-1] = arr[n-1];
         
         for(int i=1 ; i<n ; i++) {
-            if(arr[i] < pre[i-1])
-                pre[i] = pre[i-1];
-            
-            else
-                pre[i] = arr[i];
+            pre[i] = max(arr[i] , pre[i-1]);
         }
         
         for(int i=n-2 ; i>=0 ; i--) {
-            if(arr[i] < post[i+1])
-                post[i] = post[i+1];
-            
-            else
-                post[i] = arr[i];
+            post[i] = max(arr[i] , post[i+1]);
         }
         
         int result = 0;
