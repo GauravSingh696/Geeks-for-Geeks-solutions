@@ -72,7 +72,6 @@ class Trie {
             
             crawler = crawler->children[idx];
         }
-        
         return true;
     }
 };
