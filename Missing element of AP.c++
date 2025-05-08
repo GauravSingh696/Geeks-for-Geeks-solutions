@@ -16,7 +16,7 @@ class Solution {
         for(auto &it : mp) {
             if(it.second > 1)
                 val = it.first;
-            
+      
             else
                 not_present = it.first;
         }
