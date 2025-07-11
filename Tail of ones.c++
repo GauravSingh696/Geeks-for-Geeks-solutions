@@ -1,21 +1,16 @@
-// 03-06-2024
-
 class Solution {
   public:
-    int numberOfConsecutiveOnes(int n) {
-        // code here
-        if(n==2)
-            return 1;
-            
-        int a=0 , b=1 , ans=1 , mod=1e9+7;
+    int fib(int n) {
+        if(n==0)
+            return 0;
         
-        for(int i=3; i<=n; i++)
-        {
-            int c=(a+b)%mod;
-            a=b;
-            b=c;
-            ans=((ans*2)%mod+c)%mod;
-        }
-        return ans;
+        if(n==1)
+            return 1;
+        
+        return fib(n-1) + fib(n-2);
+    }
+  
+    int countConsec(int n) {
+        return (1<<n) - fib(n+2);
     }
 };
