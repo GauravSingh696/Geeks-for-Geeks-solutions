@@ -1,5 +1,3 @@
-// approach 1st
-
 class Solution {
   public:
     vector<vector<int>> vec;
