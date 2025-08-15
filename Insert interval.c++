@@ -2,26 +2,35 @@ class Solution {
   public:
     vector<vector<int>> insertInterval(vector<vector<int>> &intervals, vector<int> &newInterval) {
         intervals.push_back(newInterval);
+        sort(intervals.begin(), intervals.end());
         
-        sort(intervals.begin() , intervals.end());
+        vector<vector<int>> result;
+        int prev_start = -1;
+        int prev_end   = -1;
         
-        int i=0 , j=1 , n=intervals.size();
-        vector<vector<int>> vec;
-        
-        while(j<n) {
-            if(intervals[j][0] > intervals[j-1][1]) {
-                vec.push_back({intervals[i][0] , intervals[j-1][1]});
-                i=j , j++;
+        for(auto it : intervals) {
+            int start = it[0];
+            int end   = it[1];
+            
+            if(prev_start == -1 && prev_end == -1) {
+                prev_start = start;
+                prev_end   = end;
             }
             
             else {
-                intervals[j][1] = max(intervals[j][1] , intervals[j-1][1]);
-                j++;
+                if(prev_end < start) {
+                    result.push_back({prev_start, prev_end});
+                    prev_start = start;
+                    prev_end   = end;
+                }
+                else {
+                    prev_end = max(prev_end, end);
+                }
             }
         }
         
-        vec.push_back({intervals[i][0] , intervals[j-1][1]});
+        result.push_back({prev_start, prev_end});
         
-        return vec;
+        return result;
     }
 };
