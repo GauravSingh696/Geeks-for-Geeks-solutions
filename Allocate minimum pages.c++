@@ -1,3 +1,4 @@
+
 class Solution {
   public:
     bool isPossible(vector<int> &arr, int k, int mid) {
@@ -37,3 +38,4 @@ class Solution {
         return result;
     }
 };
+
