@@ -1,6 +1,5 @@
 class Solution {
   public:
-    // Function to count the number of possible triangles.
     int countTriangles(vector<int>& arr) {
         int n = arr.size();
         int result = 0;
@@ -8,8 +7,7 @@ class Solution {
         sort(arr.begin(), arr.end());
         
         for(int i=2;i<n;i++) {
-            int left  = 0;
-            int right = i-1;
+            int left = 0, right = i-1;
             
             while(left < right) {
                 int sum = arr[left] + arr[right];
@@ -17,10 +15,9 @@ class Solution {
                 if(sum > arr[i]) {
                     result += right - left;
                     right--;
-                }
-                
-                else
+                } else {
                     left++;
+                }
             }
         }
         
