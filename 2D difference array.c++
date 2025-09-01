@@ -3,7 +3,6 @@ class Solution {
     vector<vector<int>> applyDiff2D(vector<vector<int>>& mat, vector<vector<int>>& opr) {
         int n = mat.size();
         int m = mat[0].size();
-        
         vector<vector<int>> vec(n, vector<int>(m, 0));
         
         for(auto &it : opr) {
