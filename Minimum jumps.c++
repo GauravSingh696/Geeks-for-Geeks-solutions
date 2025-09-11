@@ -2,20 +2,25 @@ class Solution {
   public:
     int minJumps(vector<int>& arr) {
         int n = arr.size();
-        int max_idx = 0 , next_max_idx = arr[0];
-        int result = 0;
-        
-        for(int i=0;i<n-1;i++) {
-            if(max_idx == i) {
-                max_idx = max(next_max_idx , i+arr[i]);
-                next_max_idx = 0;
-                result++;
-            }
-            else {
-                next_max_idx = max(next_max_idx, i+arr[i]);
+        if (n <= 1) return 0;
+        if (arr[0] == 0) return -1; 
+
+        int maxReach = arr[0]; 
+        int steps = arr[0];   
+        int jumps = 1;     
+
+        for (int i = 1; i < n; i++) {
+            if (i == n - 1) return jumps; 
+
+            maxReach = max(maxReach, i + arr[i]);
+            steps--;
+
+            if (steps == 0) { 
+                jumps++;
+                if (i >= maxReach) return -1;
+                steps = maxReach - i;
             }
         }
-        
-        return max_idx>=n-1 ? result : -1 ;
+        return -1; 
     }
 };
