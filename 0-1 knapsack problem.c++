@@ -1,5 +1,5 @@
 class Solution {
-  public:
+ public:
     vector<vector<int>> vec;
   
     int solve(int w, vector<int> &val, vector<int> &wt, int i) {
