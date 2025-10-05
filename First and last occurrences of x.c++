@@ -3,7 +3,6 @@ class Solution
     public:
     vector<int> find(int arr[], int n , int x )
     {
-        // code here
         vector<int> result;
         
         for(int i=0;i<n;i++)
