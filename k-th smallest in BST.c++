@@ -14,7 +14,6 @@ struct Node {
 
 class Solution {
   public:
-    // Return the Kth smallest element in the given BST
     vector<int> v;
     
     void inorder(Node *root) {
