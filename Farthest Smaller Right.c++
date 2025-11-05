@@ -1,7 +1,6 @@
 class Solution {
   public:
     vector<int> farMin(vector<int>& arr) {
-        
         set<int,greater<int>> st;
         vector<int> fsr(arr.size(),-1);
         
