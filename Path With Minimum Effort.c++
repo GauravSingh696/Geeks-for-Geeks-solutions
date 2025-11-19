@@ -1,93 +1,40 @@
-// 14-05-2024
-
 class Solution {
   public:
-    int MinimumEffort(int n, int m, vector<vector<int>> &height) {
+    int minCostPath(vector<vector<int>>& mat) {
         // code here
+        priority_queue<vector<int>,vector<vector<int>>,greater<vector<int>>> pq;
         
-        priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> pq;
-        vector<vector<int>> dist(n, vector<int>(m, INT_MAX));
-        dist[0][0] = 0;
-        pq.push({0, {0,0}});
+        pq.push({0,0,0});
         
-        while(!pq.empty())
-        {
-            int step = pq.top().first;
-            int row = pq.top().second.first;
-            int col = pq.top().second.second;
+        vector<pair<int,int>> dir = {{-1,0},{1,0},{0,1},{0,-1}};
+        
+        int n = mat.size(),m = mat[0].size();
+        
+        vector<vector<int>> dp(n,vector<int>(m,INT_MAX));
+        
+        while(pq.size()!=0){
+            vector<int> t = pq.top();pq.pop();
+            int x = t[1],y=t[2],c=t[0];
             
-            pq.pop();
-            
-            if(row==n-1 && col==m-1)
-            {
-                return step;
+            if(dp[x][y]>c){
+                dp[x][y] = c;
+            }else{
+                continue;
             }
             
-            int n_row, n_col;
-            
-            n_row = row-1;      n_col = col;
-            
-            if(n_row>=0 && n_col>=0 && n_row<n && n_col<m)
-            {
-                int value = max(step, abs(height[n_row][n_col] - height[row][col]));
-                
-                if(value < dist[n_row][n_col])
-                {
-                    dist[n_row][n_col] = value;
-                    pq.push({value, {n_row, n_col}});
-                }
+            if(x==n-1 && y==m-1){
+                 break;  
             }
             
-            
-            
-            
-            n_row = row+1;      n_col = col;
-            
-            if(n_row>=0 && n_col>=0 && n_row<n && n_col<m)
-            {
-                int value = max(step, abs(height[n_row][n_col] - height[row][col]));
+            for(int i=0;i<4;i++){
+                int X = x+dir[i].first,Y = y+dir[i].second,C=0;
+                if(X<0 || Y<0 || X>=n || Y>=m)continue;
                 
-                if(value < dist[n_row][n_col])
-                {
-                    dist[n_row][n_col] = value;
-                    pq.push({value, {n_row, n_col}});
-                }
-            }
-            
-            
-            
-            
-            n_row = row;      n_col = col-1;
-            
-            if(n_row>=0 && n_col>=0 && n_row<n && n_col<m)
-            {
-                int value = max(step, abs(height[n_row][n_col] - height[row][col]));
-                
-                if(value < dist[n_row][n_col])
-                {
-                    dist[n_row][n_col] = value;
-                    pq.push({value, {n_row, n_col}});
-                }
-            }
-            
-            
-            
-            n_row = row;      n_col = col+1;
-            
-            if(n_row>=0 && n_col>=0 && n_row<n && n_col<m)
-            {
-                int value = max(step, abs(height[n_row][n_col] - height[row][col]));
-                
-                if(value < dist[n_row][n_col])
-                {
-                    dist[n_row][n_col] = value;
-                    pq.push({value, {n_row, n_col}});
-                }
+                C = max(c,abs(mat[x][y]-mat[X][Y]));
+                pq.push({C,X,Y});
             }
         }
         
-        
-        return dist[n-1][m-1];
-        
+        return dp[n-1][m-1];
     }
 };
