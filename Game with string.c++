@@ -1,7 +1,6 @@
 class Solution {
   public:
     int minValue(string &s, int k) {
-        // code here
         unordered_map<char,int> mp;
         
         for(char &ch : s) {
