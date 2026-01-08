@@ -8,16 +8,12 @@ class Solution {
         
         for(int j=0;j<n;j++) {
             mp[arr[j]]++;
-            
             while(mp.size() > k) {
                 mp[arr[i]]--;
-                
                 if(mp[arr[i]] == 0)
                     mp.erase(arr[i]);
-                
                 i++;
             }
-            
             result += j - i + 1;
         }
         
