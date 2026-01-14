@@ -5,6 +5,7 @@ class Solution {
         queue<int> police;
         queue<int> thief;
         int ans = 0;
+        
         for(int i = 0; i < n; i++){
             if(arr[i] == 'P'){
                 if(thief.empty()){
@@ -32,6 +33,7 @@ class Solution {
                 }
             }
         }
+        
         return ans;
     }
 };
