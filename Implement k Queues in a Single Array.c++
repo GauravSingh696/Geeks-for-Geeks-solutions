@@ -1,7 +1,6 @@
 class kQueues {
     int ctr, N;
     vector<queue<int>> arr;
-
   public:
     kQueues(int n, int k) {
         // Initialize your data members
