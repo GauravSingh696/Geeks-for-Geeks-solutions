@@ -3,7 +3,6 @@ class kQueues {
     vector<queue<int>> arr;
   public:
     kQueues(int n, int k) {
-        // Initialize your data members
         ctr=0;
         N=n;
         arr.resize(k);
