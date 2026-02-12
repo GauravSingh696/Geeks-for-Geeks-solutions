@@ -39,7 +39,5 @@ public:
         }
 
         return answer;
-       
-        
     }
 };
