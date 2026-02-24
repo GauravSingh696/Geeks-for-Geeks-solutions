@@ -1,9 +1,7 @@
 class Solution {
   public:
     void dfs(unordered_map<int, vector<int>> &graph, vector<int> &result, vector<bool> &visited, int child) {
-        visited[child] = true;
-        
-        
+        visited[child] = true;        
         result.push_back(child);
         
         for(auto node : graph[child]) {
@@ -14,7 +12,6 @@ class Solution {
     }
   
     vector<int> dfs(vector<vector<int>>& adj) {
-        // Code here
         unordered_map<int, vector<int>> graph;
         
         for(int i=0;i<adj.size();i++) {
