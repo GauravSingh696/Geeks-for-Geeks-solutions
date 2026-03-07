@@ -1,26 +1,22 @@
 class Solution {
-  public:
-    int solve(int m, int n, int x, int sum, vector<vector<int>> &dp) {
-        int ways = 0;
+    int solve(int &m, int n, int x, vector<vector<int>> &dp) {
+        if(n == 0)  return x == 0;
+        if(x < 0)   return 0;
+        if(dp[n][x] != -1)  return dp[n][x];
         
-        if(dp[n][sum] != -1)
-            return dp[n][sum];
-        
-        if(n == 0)
-            return sum==x ? 1 : 0;
+        int times = 0;
         
         for(int i=1;i<=m;i++) {
-            if(sum+i <= x) {
-                ways += solve(m, n-1, x, sum+i, dp);
-            }
+            times += solve(m, n-1, x-i, dp);
         }
         
-        return dp[n][sum] = ways;
+        return dp[n][x] = times;
     }
-  
+    
+  public:
     int noOfWays(int m, int n, int x) {
         vector<vector<int>> dp(n+1, vector<int>(x+1, -1));
         
-        return solve(m, n, x, 0, dp);
+        return solve(m, n, x, dp);
     }
 };
