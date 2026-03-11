@@ -11,11 +11,13 @@ class Solution {
             while(!st.empty() && arr[st.top()]>=arr[i]){
                 st.pop();
             }
+          
             if(st.empty()){
                 st.push(i);
                 continue;
             }
-            nextSmall[i]=st.top();
+          
+          nextSmall[i]=st.top();
             st.push(i);
         }
         
