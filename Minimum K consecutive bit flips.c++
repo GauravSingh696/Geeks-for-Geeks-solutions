@@ -2,7 +2,6 @@ class Solution {
   public:
     int kBitFlips(vector<int>& nums, int k) {
         int n = nums.size();
-
         int flips = 0;
         vector<bool> isFlipped(n, false);
         int flipCountFromPastForCurri = 0;
