@@ -21,7 +21,6 @@ class Solution {
     int count(vector<int>& coins, int sum) {
         int n=coins.size();
         vector<vector<int>> dp(n+1, vector<int>(sum+1, -1));
-        
         return solve(0, n, 0, sum, coins, dp);
     }
 };
