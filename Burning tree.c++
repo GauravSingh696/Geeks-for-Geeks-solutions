@@ -12,6 +12,64 @@ class Node {
 };
 */
 
+// Approach 1st...
+class Solution {
+  public:
+    int minTime(Node* root, int target) {
+        unordered_map<int, vector<int>> mp;
+        queue<Node*> que;
+        que.push(root);
+        
+        while(!que.empty()) {
+            int size = que.size();
+            
+            while(size--) {
+                Node* node = que.front();
+                que.pop();
+                
+                if(node->left) {
+                    que.push(node->left);
+                    mp[node->left->data].push_back(node->data);
+                    mp[node->data].push_back(node->left->data);
+                }
+                
+                if(node->right) {
+                    que.push(node->right);
+                    mp[node->right->data].push_back(node->data);
+                    mp[node->data].push_back(node->right->data);
+                }
+            }
+        }
+        
+        queue<int> q;
+        q.push(target);
+        unordered_set<int> visited;
+        int steps = -1;
+        
+        while(!q.empty()) {
+            int size = q.size();
+            
+            while(size--) {
+                int val = q.front();
+                q.pop();
+                
+                visited.insert(val);
+                
+                for(auto it : mp[val]) {
+                    if(visited.find(it) == visited.end())
+                        q.push(it);
+                }
+            }
+            
+            steps++;
+        }
+        
+        return steps;
+    }
+};
+
+
+// Approach 2nd...
 class Solution {
   public:
     int minTime(Node* root, int target) {
