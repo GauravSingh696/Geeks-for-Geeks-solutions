@@ -1,5 +1,3 @@
-// 05-06-2024
-
 class Solution {
  public:
     int findSwapValues(int a[], int n, int b[], int m) {
