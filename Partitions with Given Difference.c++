@@ -1,49 +1,25 @@
-// 24-05-2024
-
 class Solution {
-    int mod = 1e9+7;
-    
   public:
-    int solve(int i, int target, vector<int> &arr, vector<vector<int>> &dp)
-    {
-        if(i==0)
-        {
-            if(target==0)
-                return 1;
-            
-            return 0;
+    int solve(int i, int sum1, int sum2, int &n, vector<int> &arr, int &diff, vector<vector<vector<int>>> &dp) {
+        if(i == n) {
+            if(sum1-sum2 == diff) return 1;
+            else return 0;
         }
         
-        if(dp[i][target]!=-1)
-            return dp[i][target];
+        if(dp[i][sum1][sum2] != -1) return dp[i][sum1][sum2];
         
-        dp[i][target] = solve(i-1, target, arr, dp) % mod;
+        int op1 = solve(i+1, sum1+arr[i], sum2, n, arr, diff, dp);
+        int op2 = solve(i+1, sum1, sum2+arr[i], n, arr, diff, dp);
         
-        if(arr[i-1] <= target)
-        {
-            dp[i][target] += solve(i-1, target-arr[i-1], arr, dp);
-            dp[i][target] %= mod;
-        }
-        
-        return dp[i][target];
+        return dp[i][sum1][sum2] = op1 + op2;
     }
   
-    int countPartitions(int n, int d, vector<int>& arr) {
-        // Code here
-        int total = 0;
+    int countPartitions(vector<int>& arr, int diff) {
+        int n = arr.size();
+        int sum = accumulate(arr.begin(), arr.end(), 0);
         
-        for(int i=0;i<n;i++)
-        {
-            total += arr[i];
-        }
+        vector<vector<vector<int>>> dp(n+1, vector<vector<int>> (sum+1, vector<int> (sum+1, -1)));
         
-        if(total < d || (total-d)%2 == 1)
-            return 0;
-        
-        int target = (total-d)/2;
-        
-        vector<vector<int>> dp(n+1, vector<int>(target+1, -1));
-        
-        return solve(n, target, arr, dp);
+        return solve(0, 0, 0, n, arr, diff, dp);
     }
 };
